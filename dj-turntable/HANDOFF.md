@@ -64,6 +64,12 @@ Prices and free tiers change, so check them before committing. The user must cre
 1. Phone-browser game (PWA) for now, or a native App Store / Play Store app from the start?
 2. Which host: Cloudflare (recommended) or Render (simplest), or another option?
 
+Recommendation given to the user (not yet confirmed):
+
+- **Platform: phone-browser PWA.** No store review or fees, works on iPhone and Android from one codebase, and friends join with a link and a room code. Web Audio gives sample-accurate scheduling, which is what sync needs. It can be wrapped as a store app later (e.g. Capacitor).
+- **Host: Cloudflare** (Pages for the game, Workers + Durable Objects for rooms). One Durable Object per room is a natural fit: all players in a room talk to the same instance, which also keeps the shared clock. It never sleeps, so there's no cold start in the middle of a party, and the free tier fits a game this size. Render is the fallback if Cloudflare setup is a blocker.
+- **Order:** build step 1 (single-player) first. It needs no server and can go on Cloudflare Pages right away. Add the server in step 2.
+
 ## Build plan
 
 1. Single-player mobile game: decks, mixer, rhythm lanes, missions, built-in original tracks, loading own files with BPM detection.
